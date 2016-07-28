@@ -60,8 +60,12 @@ namespace Multi_IAP_Application
                 }
                 button1.Text = "关闭串口";
                 comboBox1.Enabled = false;
-                label3.Text = comboBox1.Text[3].ToString();
-                label3.BackColor = Color.Green;
+               // comboBox1.Text = comboBox1.Items[0].ToString();
+              // comboBox1.Text = comboBox1.SelectedIndex.ToString();
+                // label3.Text = comboBox1.Text[3].ToString();
+                int com_index = comboBox1.SelectedIndex+1;
+                label3.Text = com_index.ToString();
+                label3.BackColor = Color.Yellow;
 
                 timer_sec.Start();
             }

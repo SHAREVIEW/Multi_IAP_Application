@@ -45,6 +45,7 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.timer_sec = new System.Windows.Forms.Timer(this.components);
+            this.button4 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -60,7 +61,7 @@
             this.tableLayoutPanel1.Controls.Add(this.progressBar1, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
@@ -82,22 +83,24 @@
             this.tableLayoutPanel2.Controls.Add(this.panel2, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 2);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(720, 96);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button4);
             this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.comboBox1);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(508, 2);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(210, 92);
             this.panel1.TabIndex = 0;
@@ -105,11 +108,11 @@
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Gold;
-            this.button1.Font = new System.Drawing.Font("宋体", 13.94764F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(107, 53);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button1.Location = new System.Drawing.Point(81, 49);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 35);
+            this.button1.Size = new System.Drawing.Size(121, 35);
             this.button1.TabIndex = 2;
             this.button1.Text = "打开串口";
             this.button1.UseVisualStyleBackColor = false;
@@ -117,12 +120,12 @@
             // 
             // comboBox1
             // 
-            this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.comboBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(80, 14);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(122, 33);
+            this.comboBox1.Size = new System.Drawing.Size(122, 29);
             this.comboBox1.TabIndex = 1;
             // 
             // label1
@@ -170,7 +173,7 @@
             this.panel2.Controls.Add(this.button2);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(77, 2);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(96, 92);
             this.panel2.TabIndex = 3;
@@ -180,7 +183,7 @@
             this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.button3.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button3.Location = new System.Drawing.Point(7, 52);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(82, 32);
             this.button3.TabIndex = 1;
@@ -193,7 +196,7 @@
             this.button2.BackColor = System.Drawing.Color.LimeGreen;
             this.button2.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.button2.Location = new System.Drawing.Point(7, 10);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(82, 32);
             this.button2.TabIndex = 0;
@@ -206,7 +209,7 @@
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.HideSelection = false;
             this.richTextBox1.Location = new System.Drawing.Point(2, 102);
-            this.richTextBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(720, 258);
             this.richTextBox1.TabIndex = 1;
@@ -216,7 +219,7 @@
             // 
             this.progressBar1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.progressBar1.Location = new System.Drawing.Point(2, 364);
-            this.progressBar1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.progressBar1.Margin = new System.Windows.Forms.Padding(2);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(720, 21);
             this.progressBar1.TabIndex = 2;
@@ -235,13 +238,25 @@
             this.timer_sec.Interval = 1000;
             this.timer_sec.Tick += new System.EventHandler(this.timer_sec_Tick);
             // 
+            // button4
+            // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button4.BackColor = System.Drawing.Color.MistyRose;
+            this.button4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button4.Location = new System.Drawing.Point(21, 50);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(55, 35);
+            this.button4.TabIndex = 11;
+            this.button4.Text = "刷新";
+            this.button4.UseVisualStyleBackColor = false;
+            // 
             // IAP_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(724, 387);
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "IAP_Form";
             this.Text = "升级窗体";
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -272,5 +287,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Timer timer_sec;
+        private System.Windows.Forms.Button button4;
     }
 }
