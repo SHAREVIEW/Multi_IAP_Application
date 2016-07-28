@@ -11,7 +11,7 @@ using System.IO.Ports;
 
 namespace Multi_IAP_Application
 {
-    public partial class Form1 : Form
+    public partial class mainForm1 : Form
     {
         string ROM_Path;
         IAP_Form iap_form1 ;
@@ -24,22 +24,30 @@ namespace Multi_IAP_Application
         byte[] bytes;
         int index = 0;
 
-        public Form1()
+        public mainForm1()
         {
             InitializeComponent();
             iap_form1 = new IAP_Form();
             iap_form2 = new IAP_Form();
             iap_form3 = new IAP_Form();
             iap_form4 = new IAP_Form();
+
+
             iap_form1.MdiParent = this;
             iap_form2.MdiParent = this;
             iap_form3.MdiParent = this;
             iap_form4.MdiParent = this;
 
+
+         
+
             iap_form1.Show();
             iap_form2.Show();
             iap_form3.Show();
             iap_form4.Show();
+
+           // this.LayoutMdi(MdiLayout.TileHorizontal);
+            //this.LayoutMdi(MdiLayout.TileHorizontal);
         }
 
         private void 加载固件ToolStripMenuItem1_Click(object sender, EventArgs e)
