@@ -19,7 +19,13 @@ namespace Multi_IAP_Application
         int time_out = 0;
         int iap_send_state = 0;
         int Bin_Size;
+
+        bool unlock_cmd=false;
+
         string time_display;
+        string hardware_version;
+        string software_version;
+
         int index = 0;
         int ready_end = 0;
         int rx_count = 0;
@@ -142,10 +148,23 @@ namespace Multi_IAP_Application
                     label2.Text = "系统时间已更新\r\n" + time_display; ;
                
             }
-
-
+            else if (s.IndexOf("MB_LB") >= 0)
+            {
+                int n1 = s.IndexOf("MB_LB");
+                //string tmp = s.Substring(n1 + 7);
+                //int n2 = tmp.IndexOf(")");
+                hardware_version = s.Substring(n1 + 3, 5);
+                label5.Text = "硬件版本: " + hardware_version + "\r\n" + "软件版本: " + software_version;
+            }
             else if (s.IndexOf("Verson") >= 0)
             {
+                int m1 = s.IndexOf("Verson");
+                string tmp1 = s.Substring(m1 + 7);
+                int m2 = tmp1.IndexOf(")");
+                //richTextBox2.AppendText("固件版本:" + tmp.Substring(0, n2) + "\r\n");
+                software_version = tmp1.Substring(0, m2);
+                label5.Text = "硬件版本: " + hardware_version + "\r\n" + "软件版本: " + software_version;
+
                 readyUndate = false;
                 int n1 = s.IndexOf("Verson");
                 string tmp = s.Substring(n1 + 7);
@@ -166,21 +185,23 @@ namespace Multi_IAP_Application
                     return;
                 }
 
-                if (LocalROMVer == updateROMVer)
-                {
-                    label2.Text = "版本相同，发送开锁命令";
-                    serialPort1.Write("AT+MOTOR\r\n");
-                    serialPort1.Write("AT+MOTOR\r\n");
-                    serialPort1.Write("AT+MOTOR\r\n");
-                    readyUndate = true;
-                    richTextBox1.Clear();
-                }
-                else
-                {
-                    startIAP();
-                }
-            }
 
+                if (LocalROMVer == updateROMVer && unlock_cmd==false)
+                {  
+                        unlock_cmd=true;
+                        label2.Text = "版本相同，发送开锁命令";
+                        serialPort1.Write("AT+MOTOR\r\n");
+                        serialPort1.Write("AT+MOTOR\r\n");
+                        serialPort1.Write("AT+MOTOR\r\n");
+                        readyUndate = true;
+                        richTextBox1.Clear();
+                    }
+                    else
+                    {
+                        startIAP();
+                    }
+                }
+           
             if (s.IndexOf("AD+IAPACK=1") >= 0)
             {
                 DownSpeed = 1;
@@ -522,6 +543,14 @@ namespace Multi_IAP_Application
         private void timer1_Tick(object sender, EventArgs e)
         {
             process_iap_send();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            serialPort1.Write("AT+INFO\r\n");
+            serialPort1.Write("AT+WHO\r\n");
+            serialPort1.Write("AT+INFO\r\n");
+            serialPort1.Write("AT+WHO\r\n");
         }
     }
 }

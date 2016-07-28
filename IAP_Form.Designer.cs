@@ -46,6 +46,8 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.timer_sec = new System.Windows.Forms.Timer(this.components);
+            this.label5 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -64,7 +66,7 @@
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 137F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(724, 387);
@@ -81,14 +83,17 @@
             this.tableLayoutPanel2.Controls.Add(this.label2, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.panel2, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label5, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.button5, 1, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(2, 2);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 96F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(720, 96);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(720, 133);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // panel1
@@ -102,7 +107,7 @@
             this.panel1.Location = new System.Drawing.Point(508, 2);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(210, 92);
+            this.panel1.Size = new System.Drawing.Size(210, 91);
             this.panel1.TabIndex = 0;
             // 
             // button4
@@ -160,9 +165,10 @@
             this.label2.Location = new System.Drawing.Point(177, 0);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(327, 96);
+            this.label2.Size = new System.Drawing.Size(327, 95);
             this.label2.TabIndex = 1;
             this.label2.Text = "状态";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label3
             // 
@@ -173,7 +179,7 @@
             this.label3.Location = new System.Drawing.Point(2, 0);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 96);
+            this.label3.Size = new System.Drawing.Size(71, 95);
             this.label3.TabIndex = 2;
             this.label3.Text = "N";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -186,7 +192,7 @@
             this.panel2.Location = new System.Drawing.Point(77, 2);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(96, 92);
+            this.panel2.Size = new System.Drawing.Size(96, 91);
             this.panel2.TabIndex = 3;
             // 
             // button3
@@ -220,10 +226,10 @@
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.richTextBox1.HideSelection = false;
-            this.richTextBox1.Location = new System.Drawing.Point(2, 102);
+            this.richTextBox1.Location = new System.Drawing.Point(2, 139);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(720, 258);
+            this.richTextBox1.Size = new System.Drawing.Size(720, 221);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -249,6 +255,32 @@
             // 
             this.timer_sec.Interval = 1000;
             this.timer_sec.Tick += new System.EventHandler(this.timer_sec_Tick);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.Font = new System.Drawing.Font("幼圆", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.ForeColor = System.Drawing.Color.Crimson;
+            this.label5.Location = new System.Drawing.Point(178, 95);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(325, 38);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "硬件版本 软件版本";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // button5
+            // 
+            this.button5.BackColor = System.Drawing.Color.Aqua;
+            this.button5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button5.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button5.Location = new System.Drawing.Point(78, 98);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(94, 32);
+            this.button5.TabIndex = 6;
+            this.button5.Text = "信息获取";
+            this.button5.UseVisualStyleBackColor = false;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // IAP_Form
             // 
@@ -288,5 +320,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Timer timer_sec;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button5;
     }
 }
