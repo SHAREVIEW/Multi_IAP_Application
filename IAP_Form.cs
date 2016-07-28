@@ -186,9 +186,12 @@ namespace Multi_IAP_Application
                 }
 
 
-                if (LocalROMVer == updateROMVer && unlock_cmd==false)
-                {  
-                        unlock_cmd=true;
+                if (LocalROMVer == updateROMVer)
+                {
+
+                    if (unlock_cmd == false)
+                    {
+                        unlock_cmd = true;
                         label2.Text = "版本相同，发送开锁命令";
                         serialPort1.Write("AT+MOTOR\r\n");
                         serialPort1.Write("AT+MOTOR\r\n");
@@ -196,10 +199,12 @@ namespace Multi_IAP_Application
                         readyUndate = true;
                         richTextBox1.Clear();
                     }
-                    else
-                    {
-                        startIAP();
-                    }
+                }
+                else
+                {
+                    label5.Text = "硬件版本: " + "\r\n" + "软件版本: " ;
+                    startIAP();
+                }
                 }
            
             if (s.IndexOf("AD+IAPACK=1") >= 0)
@@ -418,7 +423,7 @@ namespace Multi_IAP_Application
                     richTextBox1.AppendText("=========================\r\n");
                     timer1.Stop();
                     timer_sec.Stop();
-                    label2.BackColor = Color.Green;
+                    label2.BackColor = Color.LightGreen;
                     break;
 
                 case 5:
@@ -500,6 +505,7 @@ namespace Multi_IAP_Application
             SendToSerialPort("AT+PWD=6789");
             string str = "AT+IAP=1";
             SendToSerialPort(str);
+            label5.Text = "硬件版本: " + "\r\n" + "软件版本: ";
             iap_send_state = 0;
             index = 0;
             ready_end = 0;
@@ -510,6 +516,7 @@ namespace Multi_IAP_Application
         {
             autoDownMode = false;
             label2.Text = "下载终止";
+            progressBar1.Value = 0;
             timer1.Stop();
             string str = "AD+IAPEND=0";
             SendToSerialPort(str);
@@ -547,8 +554,6 @@ namespace Multi_IAP_Application
 
         private void button5_Click(object sender, EventArgs e)
         {
-            serialPort1.Write("AT+INFO\r\n");
-            serialPort1.Write("AT+WHO\r\n");
             serialPort1.Write("AT+INFO\r\n");
             serialPort1.Write("AT+WHO\r\n");
         }
