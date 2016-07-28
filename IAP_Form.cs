@@ -47,7 +47,7 @@ namespace Multi_IAP_Application
         {
             InitializeComponent();
             timer2.Start();
-
+            this.comboBox1.Items.Clear();
             foreach (string vPortName in SerialPort.GetPortNames())
             {
                 this.comboBox1.Items.Add(vPortName);
@@ -588,6 +588,15 @@ namespace Multi_IAP_Application
             {
                 serialPort1.Write("AT+INFO\r\n");
                 serialPort1.Write("AT+WHO\r\n");
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.comboBox1.Items.Clear();
+            foreach (string vPortName in SerialPort.GetPortNames())
+            {
+                this.comboBox1.Items.Add(vPortName);
             }
         }
     }

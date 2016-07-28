@@ -33,8 +33,6 @@
             this.加载固件ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.页面排列ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.水平平铺ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.垂直平铺ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.层叠排列ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -72,9 +70,7 @@
             // 页面排列ToolStripMenuItem
             // 
             this.页面排列ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.水平平铺ToolStripMenuItem,
-            this.垂直平铺ToolStripMenuItem,
-            this.层叠排列ToolStripMenuItem});
+            this.水平平铺ToolStripMenuItem});
             this.页面排列ToolStripMenuItem.Name = "页面排列ToolStripMenuItem";
             this.页面排列ToolStripMenuItem.Size = new System.Drawing.Size(68, 22);
             this.页面排列ToolStripMenuItem.Text = "页面排列";
@@ -83,23 +79,9 @@
             // 水平平铺ToolStripMenuItem
             // 
             this.水平平铺ToolStripMenuItem.Name = "水平平铺ToolStripMenuItem";
-            this.水平平铺ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.水平平铺ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.水平平铺ToolStripMenuItem.Text = "水平平铺";
             this.水平平铺ToolStripMenuItem.Click += new System.EventHandler(this.横向排序ToolStripMenuItem_Click);
-            // 
-            // 垂直平铺ToolStripMenuItem
-            // 
-            this.垂直平铺ToolStripMenuItem.Name = "垂直平铺ToolStripMenuItem";
-            this.垂直平铺ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.垂直平铺ToolStripMenuItem.Text = "垂直平铺";
-            this.垂直平铺ToolStripMenuItem.Click += new System.EventHandler(this.垂直平铺ToolStripMenuItem_Click);
-            // 
-            // 层叠排列ToolStripMenuItem
-            // 
-            this.层叠排列ToolStripMenuItem.Name = "层叠排列ToolStripMenuItem";
-            this.层叠排列ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.层叠排列ToolStripMenuItem.Text = "层叠排列";
-            this.层叠排列ToolStripMenuItem.Click += new System.EventHandler(this.层叠排列ToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -152,8 +134,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem 页面排列ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 水平平铺ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 垂直平铺ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 层叠排列ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 加载固件ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 加载固件ToolStripMenuItem1;
         private System.Windows.Forms.StatusStrip statusStrip1;

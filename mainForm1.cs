@@ -38,15 +38,16 @@ namespace Multi_IAP_Application
             iap_form3.MdiParent = this;
             iap_form4.MdiParent = this;
 
-
-         
+                    
 
             iap_form1.Show();
             iap_form2.Show();
             iap_form3.Show();
             iap_form4.Show();
 
-           // this.LayoutMdi(MdiLayout.TileHorizontal);
+
+            
+            //this.LayoutMdi(MdiLayout.TileHorizontal);
             //this.LayoutMdi(MdiLayout.TileHorizontal);
         }
 
