@@ -14,10 +14,12 @@ namespace Multi_IAP_Application
 {
     public partial class IAP_Form : Form
     {
+        int isSysTimeRight = 0;
+
         int time_out = 0;
         int iap_send_state = 0;
         int Bin_Size;
-
+        string time_display;
         int index = 0;
         int ready_end = 0;
         int rx_count = 0;
@@ -80,10 +82,69 @@ namespace Multi_IAP_Application
                 timer1.Stop();
             }
         }
+        private bool CheckCurrentTime(string time)
+        {
+            DateTime dt = DateTime.Now;
+            string str_datetime = dt.ToShortDateString().ToString() + " " + time;
+            DateTime c_dt = Convert.ToDateTime(str_datetime);
+
+            if (dt > c_dt.AddSeconds(40))
+            {
+                return false;
+            }
+            else if (c_dt > dt.AddSeconds(40))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 
         private void process_iap_recv(string s)
         {
-            if (s.IndexOf("Verson") >= 0)
+            //修正时间[ INIT_INFO][11:04:10] Encrypt ok! 
+            if ((s.IndexOf("][") > 0) && (isSysTimeRight == 0))
+            {
+                int n1 = s.IndexOf("][");
+                if (n1 < 0) return;
+                string tmp = s.Substring(n1 + 2);
+                int n2 = tmp.IndexOf("]");
+                if (n2 < 0) return;
+                string str = tmp.Substring(0, n2);
+                time_display = tmp.Substring(0, n2); 
+                bool b = CheckCurrentTime(str);
+                if (b == false)
+                {
+                    isSysTimeRight = 1;
+                    label2.ForeColor = Color.Red;
+                    label2.Text = "时间错误--请更新时间 \r\n" + time_display;
+                    
+                    string setTimeStr = DateTime.Now.ToString("yyyy,MM,dd,HH,mm,ss");
+                    SendToSerialPort("AT+SETTIME=" + setTimeStr);
+                }
+            }
+            else if (s.IndexOf("Set System Time OK") >= 0)
+            {
+                if (s.IndexOf("][") > 0)
+                {
+                    int n1 = s.IndexOf("][");
+                    if (n1 < 0) return;
+                    string tmp = s.Substring(n1 + 2);
+                    int n2 = tmp.IndexOf("]");
+                    if (n2 < 0) return;
+                    time_display = tmp.Substring(0, n2);
+                 }
+
+                    isSysTimeRight = 0;
+                    label2.ForeColor = Color.Black;
+                    label2.Text = "系统时间已更新\r\n" + time_display; ;
+               
+            }
+
+
+            else if (s.IndexOf("Verson") >= 0)
             {
                 readyUndate = false;
                 int n1 = s.IndexOf("Verson");
@@ -92,7 +153,7 @@ namespace Multi_IAP_Application
                 if (n2 < 0) return;
                 LocalROMVer = tmp.Substring(0, n2).Trim();
                 richTextBox1.AppendText("#################################\r\n");
-                richTextBox1.AppendText("检测到的软件版本号为："+ LocalROMVer +"\r\n");
+                richTextBox1.AppendText("检测到的软件版本号为：" + LocalROMVer + "\r\n");
                 richTextBox1.AppendText("#################################\r\n");
 
                 if (autoDownMode == false)
