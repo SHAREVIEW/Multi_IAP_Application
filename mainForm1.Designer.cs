@@ -83,21 +83,21 @@
             // 水平平铺ToolStripMenuItem
             // 
             this.水平平铺ToolStripMenuItem.Name = "水平平铺ToolStripMenuItem";
-            this.水平平铺ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.水平平铺ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.水平平铺ToolStripMenuItem.Text = "水平平铺";
             this.水平平铺ToolStripMenuItem.Click += new System.EventHandler(this.横向排序ToolStripMenuItem_Click);
             // 
             // 垂直平铺ToolStripMenuItem
             // 
             this.垂直平铺ToolStripMenuItem.Name = "垂直平铺ToolStripMenuItem";
-            this.垂直平铺ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.垂直平铺ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.垂直平铺ToolStripMenuItem.Text = "垂直平铺";
             this.垂直平铺ToolStripMenuItem.Click += new System.EventHandler(this.垂直平铺ToolStripMenuItem_Click);
             // 
             // 层叠排列ToolStripMenuItem
             // 
             this.层叠排列ToolStripMenuItem.Name = "层叠排列ToolStripMenuItem";
-            this.层叠排列ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.层叠排列ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.层叠排列ToolStripMenuItem.Text = "层叠排列";
             this.层叠排列ToolStripMenuItem.Click += new System.EventHandler(this.层叠排列ToolStripMenuItem_Click);
             // 

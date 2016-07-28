@@ -34,6 +34,8 @@ namespace Multi_IAP_Application
         int DownSpeed = 1;//1 = 500字节 2: = 1024， 3：2048  4: 2*2048
         bool autoDownMode = true;
 
+        bool check_device_version = true;
+
         public byte[] DownBytes;//存储需要下载的数据
 
         string LocalROMVer;//串口检测到的ROM版本
@@ -203,6 +205,9 @@ namespace Multi_IAP_Application
                 else
                 {
                     label5.Text = "硬件版本: " + "\r\n" + "软件版本: " ;
+                    label4.Text = "";
+                    label4.BackColor = Color.WhiteSmoke;
+
                     startIAP();
                 }
                 }
@@ -274,13 +279,18 @@ namespace Multi_IAP_Application
             {
                 iap_send_state = 4;
                 time_out = 0;
-                label2.Text = "固件下载成功" + "  总耗时：" + time_count + " 秒"; ;
+                label2.Text = "固件下载成功" + "  总耗时：" + time_count + " 秒";
+                label4.Text = "成   功";
+                label4.BackColor = Color.LightGreen;
+
             }
             else if (s.IndexOf("AD+IAPENDACK=2") >= 0)
             {
                 iap_send_state = 5;
                 time_out = 0;
                 label2.Text = "固件下载失败";
+                label4.Text = "失  败";
+                label4.BackColor = Color.Red;
             }
         }
 
@@ -424,14 +434,16 @@ namespace Multi_IAP_Application
                     timer1.Stop();
                     timer_sec.Stop();
                     label2.BackColor = Color.LightGreen;
+
+                    check_device_version = true; // 查询版本
                     break;
 
                 case 5:
                     timer1.Stop();
                     richTextBox1.AppendText("固件下载结束ERROR\r\n");
                     label2.BackColor = Color.Red;
+                    check_device_version = true; // 查询版本
                     break;
-
             }
         }
 
@@ -479,6 +491,9 @@ namespace Multi_IAP_Application
         private void button2_Click(object sender, EventArgs e)
         {
             autoDownMode = true;
+            label4.Text = "";
+            label4.BackColor = Color.WhiteSmoke;
+            progressBar1.Value = 0;
             startIAP();
         }
 
@@ -507,6 +522,7 @@ namespace Multi_IAP_Application
             SendToSerialPort(str);
             label5.Text = "硬件版本: " + "\r\n" + "软件版本: ";
             iap_send_state = 0;
+            check_device_version = false; // 不在查询版本
             index = 0;
             ready_end = 0;
             //timer_sec.Start();
@@ -521,6 +537,8 @@ namespace Multi_IAP_Application
             string str = "AD+IAPEND=0";
             SendToSerialPort(str);
             iap_send_state = 0;
+            label4.Text = "";
+            label4.BackColor = Color.WhiteSmoke;
             //timer_sec.Stop();
         }
         private void SendToSerialPort(string data)
@@ -554,8 +572,22 @@ namespace Multi_IAP_Application
 
         private void button5_Click(object sender, EventArgs e)
         {
-            serialPort1.Write("AT+INFO\r\n");
-            serialPort1.Write("AT+WHO\r\n");
+            if (serialPort1.IsOpen == true)
+            {
+                serialPort1.Write("AT+INFO\r\n");
+                serialPort1.Write("AT+WHO\r\n");
+            }
+       
+        }
+
+        // 2000mS
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            if (serialPort1.IsOpen == true && check_device_version == true)
+            {
+                serialPort1.Write("AT+INFO\r\n");
+                serialPort1.Write("AT+WHO\r\n");
+            }
         }
     }
 }
