@@ -92,5 +92,10 @@ namespace Multi_IAP_Application
         {
             this.LayoutMdi(MdiLayout.TileVertical);
         }
+
+        private void 页面排列ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
