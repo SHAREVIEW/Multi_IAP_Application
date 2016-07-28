@@ -46,6 +46,7 @@ namespace Multi_IAP_Application
         public IAP_Form()
         {
             InitializeComponent();
+            timer2.Start();
 
             foreach (string vPortName in SerialPort.GetPortNames())
             {
