@@ -458,5 +458,15 @@ namespace Multi_IAP_Application
         {
             process_iap_send();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            this.comboBox1.Items.Clear();
+            comboBox1.Text = "";
+            foreach (string vPortName in SerialPort.GetPortNames())
+            {
+                this.comboBox1.Items.Add(vPortName);
+            }
+        }
     }
 }
