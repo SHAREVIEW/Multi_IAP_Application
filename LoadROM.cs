@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Multi_IAP_Application
 {
@@ -25,8 +26,21 @@ namespace Multi_IAP_Application
             openFileDialog.Filter = "Bin文件(*.bin)|*.bin";
             openFileDialog.RestoreDirectory = true;
             openFileDialog.FilterIndex = 1;
+            openFileDialog.Multiselect = true;//允许同时选择多个文件
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
+                int i = 0;
+                //string strFileName;
+
+                foreach (string strFileName in openFileDialog.FileNames)
+                {
+
+                   
+                    listView1.Items[i].SubItems[1].Text = Path.GetFileName(strFileName);
+                    i++;
+                }
+
+
                 textBox1.Text = openFileDialog.FileName;
                 ROM_Path = openFileDialog.FileName;
 
