@@ -63,6 +63,11 @@ namespace Multi_IAP_Application
                 ROMLB_3_3_bytes = ROMLB_3_3_bin_read.ReadBytes(ROMLB_3_3_Bin_Size);
                 ROMLB_3_3_bin_read.Close();
                 fs1.Close();
+                string filename1 = Path.GetFileName(ROMLB3_3_Path);
+                listView1.Items[0].SubItems[2].Text = filename1.Substring(10, 5);
+                listView1.Items[0].SubItems[3].Text = filename1.Substring(16, 4);
+                size1 = size1 / 1024;
+                listView1.Items[0].SubItems[4].Text = size1.ToString() + "KB";
             }
 
             if (ROMLB3_4_Path != "")
@@ -76,6 +81,11 @@ namespace Multi_IAP_Application
                 ROMLB_3_4_bytes = ROMLB_3_4_bin_read.ReadBytes(ROMLB_3_4_Bin_Size);
                 ROMLB_3_4_bin_read.Close();
                 fs2.Close();
+                string filename2 = Path.GetFileName(ROMLB3_4_Path);
+                listView1.Items[1].SubItems[2].Text = filename2.Substring(10, 5);
+                listView1.Items[1].SubItems[3].Text = filename2.Substring(16, 4);
+                size2 = size2 / 1024;
+                listView1.Items[1].SubItems[4].Text = size2.ToString() + "KB";
             }
 
 
@@ -101,6 +111,7 @@ namespace Multi_IAP_Application
 
                 if (ROMLB3_3_Path != "")
                 {
+
                     FileInfo info1 = new FileInfo(ROMLB3_3_Path);
                     int size1 = (int)info1.Length;
                     ROMLB_3_3_Bin_Size = size1;
@@ -110,6 +121,12 @@ namespace Multi_IAP_Application
                     ROMLB_3_3_bytes = ROMLB_3_3_bin_read.ReadBytes(ROMLB_3_3_Bin_Size);
                     ROMLB_3_3_bin_read.Close();
                     fs1.Close();
+
+                    string filename1 = Path.GetFileName(ROMLB3_3_Path);
+                    listView1.Items[0].SubItems[2].Text = filename1.Substring(10, 5);
+                    listView1.Items[0].SubItems[3].Text = filename1.Substring(16, 4);
+                    size1 = size1 / 1024;
+                    listView1.Items[0].SubItems[4].Text = size1.ToString()+ "KB";
                 }
 
 
@@ -155,6 +172,12 @@ namespace Multi_IAP_Application
                     ROMLB_3_4_bytes = ROMLB_3_4_bin_read.ReadBytes(ROMLB_3_4_Bin_Size);
                     ROMLB_3_4_bin_read.Close();
                     fs2.Close();
+                    string filename2 = Path.GetFileName(ROMLB3_4_Path);
+                    listView1.Items[1].SubItems[2].Text = filename2.Substring(10, 5);
+                    listView1.Items[1].SubItems[3].Text = filename2.Substring(16, 4);
+                    size2= size2 / 1024;
+                    listView1.Items[0].SubItems[4].Text = size2.ToString() + "KB";
+
                 }
                 ROM_Path2 = openFileDialog.FileName;
 
