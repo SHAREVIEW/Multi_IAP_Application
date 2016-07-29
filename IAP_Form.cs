@@ -253,10 +253,13 @@ namespace Multi_IAP_Application
 
                     if (tmp_LocalROMVer == tmp_updateROMVer)
                     {
+                        label2.BackColor = Color.Green;
+                        label4.BackColor = Color.Green;
+                        label2.Text = "版本相同，发送开锁命令";
                         if (unlock_cmd == false)
                         {
                             unlock_cmd = true;
-                            label2.Text = "版本相同，发送开锁命令";
+
                             serialPort1.Write("AT+MOTOR\r\n");
                             serialPort1.Write("AT+MOTOR\r\n");
                             serialPort1.Write("AT+MOTOR\r\n");
@@ -269,7 +272,7 @@ namespace Multi_IAP_Application
                         label5.Text = "硬件版本: " + "\r\n" + "软件版本: ";
                         label4.Text = "";
                         label4.BackColor = Color.WhiteSmoke;
-
+                        label2.BackColor = Color.WhiteSmoke;
                         startIAP();
                     }
                 }
@@ -284,11 +287,12 @@ namespace Multi_IAP_Application
 
                     if (tmp_LocalROMVer == tmp_updateROMVer)
                     {
-
+                        label2.BackColor = Color.Green;
+                        label4.BackColor = Color.Green;
+                        label2.Text = "版本相同，发送开锁命令";
                         if (unlock_cmd == false)
                         {
                             unlock_cmd = true;
-                            label2.Text = "版本相同，发送开锁命令";
                             serialPort1.Write("AT+MOTOR\r\n");
                             serialPort1.Write("AT+MOTOR\r\n");
                             serialPort1.Write("AT+MOTOR\r\n");
@@ -301,6 +305,7 @@ namespace Multi_IAP_Application
                         label5.Text = "硬件版本: " + "\r\n" + "软件版本: ";
                         label4.Text = "";
                         label4.BackColor = Color.WhiteSmoke;
+                        label2.BackColor = Color.WhiteSmoke;
 
                         startIAP();
                     }
@@ -376,7 +381,8 @@ namespace Multi_IAP_Application
                 time_out = 0;
                 label2.Text = "固件下载成功" + "  总耗时：" + time_count + " 秒";
                 label4.Text = "成   功";
-                label4.BackColor = Color.LightGreen;
+                label2.BackColor = Color.Green;
+                label4.BackColor = Color.Green;
 
             }
             else if (s.IndexOf("AD+IAPENDACK=2") >= 0)
@@ -399,7 +405,7 @@ namespace Multi_IAP_Application
                         uint crc = CRC.calcCRC(DownBytes);
                         string str = "AD+IAPSIZE=" + Bin_Size + "," + crc;
                         SendToSerialPort(str);
-                        time_out = 500;
+                        time_out = 800;
                     }
                     time_out--;
                     break;
@@ -505,7 +511,7 @@ namespace Multi_IAP_Application
                             }
                         }
                         serialPort1.Write(str2 + "\r\n");
-                        time_out = 100;
+                        time_out = 800;
                     }
                     time_out--;
                     break;
@@ -515,7 +521,7 @@ namespace Multi_IAP_Application
                     {
                         string str = "AD+IAPEND=1";
                         SendToSerialPort(str);
-                        time_out = 100;
+                        time_out = 800;
                     }
                     time_out--;
                     break;
@@ -528,7 +534,7 @@ namespace Multi_IAP_Application
                     richTextBox1.AppendText("=========================\r\n");
                     timer1.Stop();
                     timer_sec.Stop();
-                    label2.BackColor = Color.LightGreen;
+                    label2.BackColor = Color.Green;
 
                     check_device_version = true; // 查询版本
                     break;
