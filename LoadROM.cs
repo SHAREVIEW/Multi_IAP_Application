@@ -14,6 +14,9 @@ namespace Multi_IAP_Application
     {
         public string ROM_Path;
         public string romVer;
+        public string ROM_Path2;
+        public string romVer2;
+
         public LoadROM()
         {
             InitializeComponent();
@@ -29,17 +32,9 @@ namespace Multi_IAP_Application
             openFileDialog.Multiselect = true;//允许同时选择多个文件
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                int i = 0;
-                //string strFileName;
 
-                foreach (string strFileName in openFileDialog.FileNames)
-                {
-
-                   
-                    listView1.Items[i].SubItems[1].Text = Path.GetFileName(strFileName);
-                    i++;
-                }
-
+                    string strFileName = openFileDialog.FileName;
+                    listView1.Items[0].SubItems[1].Text = Path.GetFileName(strFileName);
 
                 textBox1.Text = openFileDialog.FileName;
                 ROM_Path = openFileDialog.FileName;
@@ -50,6 +45,26 @@ namespace Multi_IAP_Application
         private void button2_Click(object sender, EventArgs e)
         {
                 romVer = textBox2.Text;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = "E:\\";
+            openFileDialog.Filter = "Bin文件(*.bin)|*.bin";
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.Multiselect = true;//允许同时选择多个文件
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+   
+                  string strFileName = openFileDialog.FileName;
+                  listView1.Items[1].SubItems[1].Text = Path.GetFileName(strFileName);
+
+                textBox3.Text = openFileDialog.FileName;
+                ROM_Path2 = openFileDialog.FileName;
+
+            }
         }
     }
 }
