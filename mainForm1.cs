@@ -81,15 +81,15 @@ namespace Multi_IAP_Application
             bin_read.Close();
             fs.Close();
 
-            iap_form1.DownBytes = bytes;
-            iap_form2.DownBytes = bytes;
-            iap_form3.DownBytes = bytes;
-            iap_form4.DownBytes = bytes;
+            //iap_form1.DownBytes = bytes;
+            //iap_form2.DownBytes = bytes;
+            //iap_form3.DownBytes = bytes;
+            //iap_form4.DownBytes = bytes;
 
-            iap_form1.updateROMVer = loadRomForm.romVer;
-            iap_form2.updateROMVer = loadRomForm.romVer;
-            iap_form3.updateROMVer = loadRomForm.romVer;
-            iap_form4.updateROMVer = loadRomForm.romVer;
+            //iap_form1.updateROMVer = loadRomForm.romVer;
+            //iap_form2.updateROMVer = loadRomForm.romVer;
+            //iap_form3.updateROMVer = loadRomForm.romVer;
+            //iap_form4.updateROMVer = loadRomForm.romVer;
         }
 
         private void 加载固件ToolStripMenuItem1_Click(object sender, EventArgs e)

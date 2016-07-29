@@ -37,6 +37,10 @@ namespace Multi_IAP_Application
         bool check_device_version = true;
 
         public byte[] DownBytes;//存储需要下载的数据
+        int ROM_Bin_Size; // 文件大小
+        BinaryReader ROM_Bin_read; // 二进制读取
+
+
 
         string LocalROMVer;//串口检测到的ROM版本
         public string updateROMVer;//升级到的软件版本号
@@ -111,6 +115,56 @@ namespace Multi_IAP_Application
             }
         }
 
+        private void load_iap_bin_file(string s)
+        {
+            string tROMLB3_3_Path = Properties.Settings.Default.LB3_3_FilePath;
+            string tROMLB3_4_Path = Properties.Settings.Default.LB3_4_FilePath;
+
+
+        
+            string tROM_Path;
+
+
+            if (tROMLB3_3_Path == "") return;
+            if (tROMLB3_4_Path == "") return;
+
+            if(s=="LB3_3")
+            {
+                tROM_Path=tROMLB3_3_Path;
+                FileInfo info = new FileInfo(tROM_Path);
+                int size = (int)info.Length;
+                Bin_Size = size;
+                ROM_Bin_Size = Bin_Size;
+                FileStream fs = new FileStream(tROM_Path, FileMode.Open, FileAccess.Read);
+                ROM_Bin_read = new BinaryReader(fs);
+                DownBytes = ROM_Bin_read.ReadBytes(size);
+                ROM_Bin_read.Close();
+                fs.Close();
+                string filename1 = Path.GetFileName(tROM_Path);
+                updateROMVer = filename1.Substring(19, 4);
+                label4.Text ="升级版本"+ updateROMVer;
+            }
+            if(s=="LB3_4")
+            {
+                tROM_Path=tROMLB3_4_Path;
+                FileInfo info = new FileInfo(tROM_Path);
+                int size = (int)info.Length;
+                Bin_Size = size;
+                ROM_Bin_Size = Bin_Size;
+                FileStream fs = new FileStream(tROM_Path, FileMode.Open, FileAccess.Read);
+                ROM_Bin_read = new BinaryReader(fs);
+                DownBytes = ROM_Bin_read.ReadBytes(size);
+                ROM_Bin_read.Close();
+                fs.Close();
+                // 获取要升级的软件版本
+                string filename1 = Path.GetFileName(tROM_Path);
+                updateROMVer = filename1.Substring(19, 4);
+                label4.Text = "升级版本" + updateROMVer;
+            }
+
+
+        }
+
         private void process_iap_recv(string s)
         {
             //修正时间[ INIT_INFO][11:04:10] Encrypt ok! 
@@ -174,9 +228,9 @@ namespace Multi_IAP_Application
                 int n2 = tmp.IndexOf(")");
                 if (n2 < 0) return;
                 LocalROMVer = tmp.Substring(0, n2).Trim();
-                richTextBox1.AppendText("#################################\r\n");
-                richTextBox1.AppendText("检测到的软件版本号为：" + LocalROMVer + "\r\n");
-                richTextBox1.AppendText("#################################\r\n");
+                //richTextBox1.AppendText("#################################\r\n");
+                //richTextBox1.AppendText("检测到的软件版本号为：" + LocalROMVer + "\r\n");
+                //richTextBox1.AppendText("#################################\r\n");
 
                 if (autoDownMode == false)
                 {
@@ -188,30 +242,68 @@ namespace Multi_IAP_Application
                     return;
                 }
 
-                string tmp_LocalROMVer;
-               tmp_LocalROMVer= LocalROMVer.Replace(".", "");
-
-               if (tmp_LocalROMVer == updateROMVer)
+                //加载LB3_3固件，版本比较
+                if (hardware_version == "LB3_3")
                 {
+                    load_iap_bin_file(hardware_version);
 
-                    if (unlock_cmd == false)
+                    // 版本比较，相同版本不升级
+                    string tmp_LocalROMVer = LocalROMVer.Replace(".", "");
+                    string tmp_updateROMVer = updateROMVer.Replace("V", "");
+
+                    if (tmp_LocalROMVer == tmp_updateROMVer)
                     {
-                        unlock_cmd = true;
-                        label2.Text = "版本相同，发送开锁命令";
-                        serialPort1.Write("AT+MOTOR\r\n");
-                        serialPort1.Write("AT+MOTOR\r\n");
-                        serialPort1.Write("AT+MOTOR\r\n");
-                        readyUndate = true;
-                        richTextBox1.Clear();
+                        if (unlock_cmd == false)
+                        {
+                            unlock_cmd = true;
+                            label2.Text = "版本相同，发送开锁命令";
+                            serialPort1.Write("AT+MOTOR\r\n");
+                            serialPort1.Write("AT+MOTOR\r\n");
+                            serialPort1.Write("AT+MOTOR\r\n");
+                            readyUndate = true;
+                            richTextBox1.Clear();
+                        }
+                    }
+                    else
+                    {
+                        label5.Text = "硬件版本: " + "\r\n" + "软件版本: ";
+                        label4.Text = "";
+                        label4.BackColor = Color.WhiteSmoke;
+
+                        startIAP();
                     }
                 }
-                else
-                {
-                    label5.Text = "硬件版本: " + "\r\n" + "软件版本: " ;
-                    label4.Text = "";
-                    label4.BackColor = Color.WhiteSmoke;
 
-                    startIAP();
+                if (hardware_version == "LB3_4")
+                {
+                    load_iap_bin_file(hardware_version);
+
+                    // 版本比较，相同版本不升级
+                    string tmp_LocalROMVer = LocalROMVer.Replace(".", "");
+                    string tmp_updateROMVer = updateROMVer.Replace("V", "");
+
+                    if (tmp_LocalROMVer == tmp_updateROMVer)
+                    {
+
+                        if (unlock_cmd == false)
+                        {
+                            unlock_cmd = true;
+                            label2.Text = "版本相同，发送开锁命令";
+                            serialPort1.Write("AT+MOTOR\r\n");
+                            serialPort1.Write("AT+MOTOR\r\n");
+                            serialPort1.Write("AT+MOTOR\r\n");
+                            readyUndate = true;
+                            richTextBox1.Clear();
+                        }
+                    }
+                    else
+                    {
+                        label5.Text = "硬件版本: " + "\r\n" + "软件版本: ";
+                        label4.Text = "";
+                        label4.BackColor = Color.WhiteSmoke;
+
+                        startIAP();
+                    }
                 }
                 }
            
@@ -507,11 +599,18 @@ namespace Multi_IAP_Application
                 MessageBox.Show("请打开串口！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+
+
+
             if (DownBytes == null)
             {
                 MessageBox.Show("请添加固件！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+
+
             Bin_Size = DownBytes.Length;
             progressBar1.Maximum = Bin_Size / 500;
 
