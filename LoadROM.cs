@@ -20,9 +20,26 @@ namespace Multi_IAP_Application
         public string ROM_Path2;
         public string romVer2;
 
+        public string ROMLB3_3_Path;
+        public string ROMLB_3_3_Ver;
+        public string ROMLB3_4_Path;
+        public string ROMLB_3_4_Ver;
+
+
         public LoadROM()
         {
             InitializeComponent();
+
+            ROMLB3_3_Path = Properties.Settings.Default.LB3_3_FilePath;
+            ROMLB3_4_Path = Properties.Settings.Default.LB3_4_FilePath;
+
+
+            textBox1.Text = ROMLB3_3_Path;
+            textBox3.Text = ROMLB3_4_Path;
+
+
+            listView1.Items[0].SubItems[1].Text = Path.GetFileName(ROMLB3_3_Path);
+            listView1.Items[1].SubItems[1].Text = Path.GetFileName(ROMLB3_4_Path);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -36,14 +53,15 @@ namespace Multi_IAP_Application
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
 
-                    string strFileName = openFileDialog.FileName;
-                    listView1.Items[0].SubItems[1].Text = Path.GetFileName(strFileName);
+                string strFileName = openFileDialog.FileName;
+                listView1.Items[0].SubItems[1].Text = Path.GetFileName(strFileName);
 
+                string tPath = Properties.Settings.Default.LB3_3_FilePath;
             
-
-
-
                 textBox1.Text = openFileDialog.FileName;
+                Properties.Settings.Default.LB3_3_FilePath = textBox1.Text;
+                Properties.Settings.Default.Save();  // save 文件路径
+
                 ROM_Path = openFileDialog.FileName;
 
             }
@@ -65,10 +83,17 @@ namespace Multi_IAP_Application
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
    
-                  string strFileName = openFileDialog.FileName;
-                  listView1.Items[1].SubItems[1].Text = Path.GetFileName(strFileName);
+                string strFileName = openFileDialog.FileName;
+                listView1.Items[1].SubItems[1].Text = Path.GetFileName(strFileName);
 
                 textBox3.Text = openFileDialog.FileName;
+
+                Properties.Settings.Default.LB3_4_FilePath = textBox3.Text;
+                Properties.Settings.Default.Save();  // save 文件路径
+                string tPath = Properties.Settings.Default.LB3_4_FilePath;
+            
+
+
                 ROM_Path2 = openFileDialog.FileName;
 
             }
