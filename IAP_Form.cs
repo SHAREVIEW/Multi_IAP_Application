@@ -190,6 +190,7 @@ namespace Multi_IAP_Application
                     
                     string setTimeStr = DateTime.Now.ToString("yyyy,MM,dd,HH,mm,ss");
                     SendToSerialPort("AT+SETTIME=" + setTimeStr);
+                    SendToSerialPort("AT+SETTIME=" + setTimeStr);
                 }
             }
             else if (s.IndexOf("Set System Time OK") >= 0)
@@ -525,6 +526,7 @@ namespace Multi_IAP_Application
                     {
                         string str = "AD+IAPEND=1";
                         SendToSerialPort(str);
+                        SendToSerialPort(str);
                         time_out = 800;
                     }
                     time_out--;
@@ -632,6 +634,8 @@ namespace Multi_IAP_Application
             SendToSerialPort("AT+PWD=6789");
             string str = "AT+IAP=1";
             SendToSerialPort(str);
+            SendToSerialPort(str);
+            SendToSerialPort(str);
             label5.Text = "硬件版本: " + "\r\n" + "软件版本: ";
             iap_send_state = 0;
             check_device_version = false; // 不在查询版本
@@ -647,6 +651,7 @@ namespace Multi_IAP_Application
             progressBar1.Value = 0;
             timer1.Stop();
             string str = "AD+IAPEND=0";
+            SendToSerialPort(str);
             SendToSerialPort(str);
             iap_send_state = 0;
             label4.Text = "";
@@ -701,14 +706,16 @@ namespace Multi_IAP_Application
  
             if (serialPort1.IsOpen == true && check_device_version == true)
             {
-          
-                    serialPort1.Write("AT+INFO\r\n");
-                    serialPort1.Write("AT+WHO\r\n");
-                
                 if (cnt_set_time % 2 == 0)
                 {
                     string setTimeStr = DateTime.Now.ToString("yyyy,MM,dd,HH,mm,ss");
                     SendToSerialPort("AT+SETTIME=" + setTimeStr);
+                    SendToSerialPort("AT+SETTIME=" + setTimeStr);
+                }
+                else
+                {
+                    serialPort1.Write("AT+INFO\r\n");
+                    serialPort1.Write("AT+WHO\r\n");
                 }
 
 
