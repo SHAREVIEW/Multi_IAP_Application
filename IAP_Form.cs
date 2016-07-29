@@ -19,7 +19,7 @@ namespace Multi_IAP_Application
         int time_out = 0;
         int iap_send_state = 0;
         int Bin_Size;
-
+        int cnt_set_time = 0;
         bool unlock_cmd=false;
 
         string time_display;
@@ -176,8 +176,12 @@ namespace Multi_IAP_Application
                 int n2 = tmp.IndexOf("]");
                 if (n2 < 0) return;
                 string str = tmp.Substring(0, n2);
-                time_display = tmp.Substring(0, n2); 
+                time_display = tmp.Substring(0, n2);
+
+                label6.Text = time_display;
                 bool b = CheckCurrentTime(str);
+
+
                 if (b == false)
                 {
                     isSysTimeRight = 1;
@@ -691,11 +695,28 @@ namespace Multi_IAP_Application
         // 2000mS
         private void timer2_Tick(object sender, EventArgs e)
         {
+            cnt_set_time++;
+            if (cnt_set_time>10000)
+                cnt_set_time=0;
+ 
             if (serialPort1.IsOpen == true && check_device_version == true)
             {
-                serialPort1.Write("AT+INFO\r\n");
-                serialPort1.Write("AT+WHO\r\n");
+          
+                    serialPort1.Write("AT+INFO\r\n");
+                    serialPort1.Write("AT+WHO\r\n");
+                
+                if (cnt_set_time % 2 == 0)
+                {
+                    string setTimeStr = DateTime.Now.ToString("yyyy,MM,dd,HH,mm,ss");
+                    SendToSerialPort("AT+SETTIME=" + setTimeStr);
+                }
+
+
             }
+
+
+
+
         }
 
         private void button4_Click(object sender, EventArgs e)

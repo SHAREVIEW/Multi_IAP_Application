@@ -14,7 +14,7 @@ namespace Multi_IAP_Application
     public partial class mainForm1 : Form
     {
         string ROM_Path;
-        string ROM_VERSION;
+        //string ROM_VERSION;
         IAP_Form iap_form1 ;
         IAP_Form iap_form2 ;
         IAP_Form iap_form3 ;
@@ -23,7 +23,7 @@ namespace Multi_IAP_Application
         int Bin_Size;
         BinaryReader bin_read;
         byte[] bytes;
-        int index = 0;
+        //int index = 0;
 
 
 
@@ -74,28 +74,28 @@ namespace Multi_IAP_Application
                 //加载bin文件到数组
 
 
-                FileInfo info = new FileInfo(ROM_Path);
-                int size = (int)info.Length;
-                toolStripStatusLabel2.Text = ("文件大小 = " + size);
-                Bin_Size = size;
+                //FileInfo info = new FileInfo(ROM_Path);
+                //int size = (int)info.Length;
+                //toolStripStatusLabel2.Text = ("文件大小 = " + size);
+                //Bin_Size = size;
 
-                FileStream fs = new FileStream(ROM_Path, FileMode.Open, FileAccess.Read);
-                bin_read = new BinaryReader(fs);
-                bytes = new byte[size];
-                bytes = bin_read.ReadBytes(size);
-                //button1.Enabled = false;
-                bin_read.Close();
-                fs.Close();
+                //FileStream fs = new FileStream(ROM_Path, FileMode.Open, FileAccess.Read);
+                //bin_read = new BinaryReader(fs);
+                //bytes = new byte[size];
+                //bytes = bin_read.ReadBytes(size);
+                ////button1.Enabled = false;
+                //bin_read.Close();
+                //fs.Close();
 
-                iap_form1.DownBytes = bytes;
-                iap_form2.DownBytes = bytes;
-                iap_form3.DownBytes = bytes;
-                iap_form4.DownBytes = bytes;
+                //iap_form1.DownBytes = bytes;
+                //iap_form2.DownBytes = bytes;
+                //iap_form3.DownBytes = bytes;
+                //iap_form4.DownBytes = bytes;
 
-                iap_form1.updateROMVer = loadRomForm.romVer;
-                iap_form2.updateROMVer = loadRomForm.romVer;
-                iap_form3.updateROMVer = loadRomForm.romVer;
-                iap_form4.updateROMVer = loadRomForm.romVer;
+                //iap_form1.updateROMVer = loadRomForm.romVer;
+                //iap_form2.updateROMVer = loadRomForm.romVer;
+                //iap_form3.updateROMVer = loadRomForm.romVer;
+                //iap_form4.updateROMVer = loadRomForm.romVer;
             }
         }
 
