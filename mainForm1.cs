@@ -14,6 +14,7 @@ namespace Multi_IAP_Application
     public partial class mainForm1 : Form
     {
         string ROM_Path;
+        string ROM_VERSION;
         IAP_Form iap_form1 ;
         IAP_Form iap_form2 ;
         IAP_Form iap_form3 ;
@@ -23,6 +24,8 @@ namespace Multi_IAP_Application
         BinaryReader bin_read;
         byte[] bytes;
         int index = 0;
+
+
 
         public mainForm1()
         {
@@ -46,9 +49,47 @@ namespace Multi_IAP_Application
             iap_form4.Show();
 
 
-            
-            //this.LayoutMdi(MdiLayout.TileHorizontal);
-            //this.LayoutMdi(MdiLayout.TileHorizontal);
+
+            load_bin_file();
+       
+            //toolStripStatusLabel1.Text = "固件版本:" + ROM_VERSION;
+            //toolStripStatusLabel1.BackColor = Color.Transparent;
+
+        }
+
+        public void load_bin_file()
+        {
+            LoadROM loadRomForm = new LoadROM();
+
+            ROM_Path = loadRomForm.ROM_Path;
+            Console.WriteLine(ROM_Path);
+            toolStripStatusLabel1.Text = "固件路径:" + ROM_Path + " " + "固件版本:" + loadRomForm.romVer;
+            toolStripStatusLabel1.BackColor = Color.Transparent;
+            //加载bin文件到数组
+
+
+            FileInfo info = new FileInfo(ROM_Path);
+            int size = (int)info.Length;
+            toolStripStatusLabel2.Text = ("文件大小 = " + size);
+            Bin_Size = size;
+
+            FileStream fs = new FileStream(ROM_Path, FileMode.Open, FileAccess.Read);
+            bin_read = new BinaryReader(fs);
+            bytes = new byte[size];
+            bytes = bin_read.ReadBytes(size);
+            //button1.Enabled = false;
+            bin_read.Close();
+            fs.Close();
+
+            iap_form1.DownBytes = bytes;
+            iap_form2.DownBytes = bytes;
+            iap_form3.DownBytes = bytes;
+            iap_form4.DownBytes = bytes;
+
+            iap_form1.updateROMVer = loadRomForm.romVer;
+            iap_form2.updateROMVer = loadRomForm.romVer;
+            iap_form3.updateROMVer = loadRomForm.romVer;
+            iap_form4.updateROMVer = loadRomForm.romVer;
         }
 
         private void 加载固件ToolStripMenuItem1_Click(object sender, EventArgs e)

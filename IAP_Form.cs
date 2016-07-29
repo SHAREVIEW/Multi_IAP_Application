@@ -188,8 +188,10 @@ namespace Multi_IAP_Application
                     return;
                 }
 
+                string tmp_LocalROMVer;
+               tmp_LocalROMVer= LocalROMVer.Replace(".", "");
 
-                if (LocalROMVer == updateROMVer)
+               if (tmp_LocalROMVer == updateROMVer)
                 {
 
                     if (unlock_cmd == false)
