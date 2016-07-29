@@ -47,7 +47,7 @@ namespace Multi_IAP_Application
 
             textBox1.Text = ROMLB3_3_Path;
             textBox3.Text = ROMLB3_4_Path;
-
+            ROM_Path = ROMLB3_3_Path;
 
             listView1.Items[0].SubItems[1].Text = Path.GetFileName(ROMLB3_3_Path);
             listView1.Items[1].SubItems[1].Text = Path.GetFileName(ROMLB3_4_Path);
@@ -131,7 +131,7 @@ namespace Multi_IAP_Application
 
 
 
-                ROM_Path = openFileDialog.FileName;
+                ROM_Path = ROMLB3_3_Path;
 
             }
         }
@@ -179,7 +179,7 @@ namespace Multi_IAP_Application
                     listView1.Items[0].SubItems[4].Text = size2.ToString() + "KB";
 
                 }
-                ROM_Path2 = openFileDialog.FileName;
+                ROM_Path = ROMLB3_3_Path;
 
             }
         }

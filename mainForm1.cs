@@ -62,6 +62,8 @@ namespace Multi_IAP_Application
                 toolStripStatusLabel1.Text = "固件路径:" + ROM_Path + " " + "固件版本:" + loadRomForm.romVer;
                 toolStripStatusLabel1.BackColor = Color.Transparent;
                 //加载bin文件到数组
+
+
                 FileInfo info = new FileInfo(ROM_Path);
                 int size = (int)info.Length;
                 toolStripStatusLabel2.Text = ("文件大小 = " + size);
