@@ -8,4 +8,3 @@ C:\Users\SmallMoves\Documents\Multi_IAP_Application\obj\x86\Release\Multi_IAP_Ap
 C:\Users\SmallMoves\Documents\Multi_IAP_Application\obj\x86\Release\Multi_IAP_Application.csproj.GenerateResource.Cache
 C:\Users\SmallMoves\Documents\Multi_IAP_Application\obj\x86\Release\Multi_IAP_Application.exe
 C:\Users\SmallMoves\Documents\Multi_IAP_Application\obj\x86\Release\Multi_IAP_Application.pdb
-C:\Users\SmallMoves\Documents\Multi_IAP_Application\obj\x86\Release\Multi_IAP_Application.csprojResolveAssemblyReference.cache

@@ -167,8 +167,91 @@ namespace Multi_IAP_Application
 
         private void process_iap_recv(string s)
         {
-            //修正时间[ INIT_INFO][11:04:10] Encrypt ok! 
-            if ((s.IndexOf("][") > 0) && (isSysTimeRight == 0))
+            if (s.IndexOf(" Enter QA Status.") >= 0)
+            {
+
+                if (autoDownMode == false)
+                {
+                    return;
+                }
+
+                if (updateROMVer == "")
+                {
+                    return;
+                }
+
+                //加载LB3_3固件，版本比较
+                if (hardware_version == "LB3_3")
+                {
+                    load_iap_bin_file(hardware_version);
+
+                    // 版本比较，相同版本不升级
+                    string tmp_LocalROMVer = LocalROMVer.Replace(".", "");
+                    string tmp_updateROMVer = updateROMVer.Replace("V", "");
+
+                    if (tmp_LocalROMVer == tmp_updateROMVer)
+                    {
+                        label2.BackColor = Color.Green;
+                        label4.BackColor = Color.Green;
+                        label2.Text = "版本相同，发送开锁命令";
+                        if (unlock_cmd == false)
+                        {
+                            unlock_cmd = true;
+
+                            serialPort1.Write("AT+MOTOR\r\n");
+                            serialPort1.Write("AT+MOTOR\r\n");
+                            serialPort1.Write("AT+MOTOR\r\n");
+                            readyUndate = true;
+                            richTextBox1.Clear();
+                        }
+                    }
+                    else
+                    {
+                        label5.Text = "硬件版本: " + "\r\n" + "软件版本: ";
+                        label4.Text = "";
+                        label4.BackColor = Color.WhiteSmoke;
+                        label2.BackColor = Color.WhiteSmoke;
+                        startIAP();
+                    }
+                }
+
+                if (hardware_version == "LB3_4")
+                {
+                    load_iap_bin_file(hardware_version);
+
+                    // 版本比较，相同版本不升级
+                    string tmp_LocalROMVer = LocalROMVer.Replace(".", "");
+                    string tmp_updateROMVer = updateROMVer.Replace("V", "");
+
+                    if (tmp_LocalROMVer == tmp_updateROMVer)
+                    {
+                        label2.BackColor = Color.Green;
+                        label4.BackColor = Color.Green;
+                        label2.Text = "版本相同，发送开锁命令";
+                        if (unlock_cmd == false)
+                        {
+                            unlock_cmd = true;
+                            serialPort1.Write("AT+MOTOR\r\n");
+                            serialPort1.Write("AT+MOTOR\r\n");
+                            serialPort1.Write("AT+MOTOR\r\n");
+                            readyUndate = true;
+                            richTextBox1.Clear();
+                        }
+                    }
+                    else
+                    {
+                        label5.Text = "硬件版本: " + "\r\n" + "软件版本: ";
+                        label4.Text = "";
+                        label4.BackColor = Color.WhiteSmoke;
+                        label2.BackColor = Color.WhiteSmoke;
+
+                        startIAP();
+                    }
+                }
+            }
+
+          //修正时间[ INIT_INFO][11:04:10] Encrypt ok! 
+            else if ((s.IndexOf("][") > 0) && (isSysTimeRight == 0))
             {
                 int n1 = s.IndexOf("][");
                 if (n1 < 0) return;
@@ -187,7 +270,7 @@ namespace Multi_IAP_Application
                     isSysTimeRight = 1;
                     label2.ForeColor = Color.Red;
                     label2.Text = "时间错误--请更新时间 \r\n" + time_display;
-                    
+
                     string setTimeStr = DateTime.Now.ToString("yyyy,MM,dd,HH,mm,ss");
                     SendToSerialPort("AT+SETTIME=" + setTimeStr);
                     SendToSerialPort("AT+SETTIME=" + setTimeStr);
@@ -203,12 +286,12 @@ namespace Multi_IAP_Application
                     int n2 = tmp.IndexOf("]");
                     if (n2 < 0) return;
                     time_display = tmp.Substring(0, n2);
-                 }
+                }
 
-                    isSysTimeRight = 0;
-                    label2.ForeColor = Color.Black;
-                    label2.Text = "系统时间已更新\r\n" + time_display; ;
-               
+                isSysTimeRight = 0;
+                label2.ForeColor = Color.Black;
+                label2.Text = "系统时间已更新\r\n" + time_display; ;
+
             }
             else if (s.IndexOf("MB_LB") >= 0)
             {
@@ -315,7 +398,7 @@ namespace Multi_IAP_Application
                         startIAP();
                     }
                 }
-                }
+            }
            
             if (s.IndexOf("AD+IAPACK=1") >= 0)
             {
@@ -632,10 +715,11 @@ namespace Multi_IAP_Application
             label2.Text = "发送下载命令";
             timer1.Start();
             SendToSerialPort("AT+PWD=6789");
-            string str = "AT+IAP=1";
-            SendToSerialPort(str);
-            SendToSerialPort(str);
-            SendToSerialPort(str);
+
+
+            SendToSerialPort("AT+IAP=1\r\n");
+            SendToSerialPort("AT+IAP=1\r\n");
+
             label5.Text = "硬件版本: " + "\r\n" + "软件版本: ";
             iap_send_state = 0;
             check_device_version = false; // 不在查询版本
