@@ -16,6 +16,7 @@ namespace Multi_IAP_Application
     public partial class LoadROM : Form
     {
         public string ROM_Path;
+        public string ROM_VERSION;
         public string romVer;
         public string ROM_Path2;
         public string romVer2;
@@ -56,7 +57,9 @@ namespace Multi_IAP_Application
             listView1.Items[1].SubItems[1].Text = Path.GetFileName(ROMLB3_4_Path);
 
             check_ver();
-
+            ROM_VERSION = ROMLB_3_3_SoftwareVer;
+            textBox2.Text = ROMLB_3_3_SoftwareVer;
+            romVer = textBox2.Text;
 
         }
 
@@ -137,6 +140,8 @@ namespace Multi_IAP_Application
 
         private void button2_Click(object sender, EventArgs e)
         {
+            textBox2.Text= ROMLB_3_3_SoftwareVer;
+
                 romVer = textBox2.Text;
         }
 
