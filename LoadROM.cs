@@ -8,6 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
+using System.IO.Ports;
+using Microsoft.Win32;
+
 namespace Multi_IAP_Application
 {
     public partial class LoadROM : Form
@@ -35,6 +38,10 @@ namespace Multi_IAP_Application
 
                     string strFileName = openFileDialog.FileName;
                     listView1.Items[0].SubItems[1].Text = Path.GetFileName(strFileName);
+
+            
+
+
 
                 textBox1.Text = openFileDialog.FileName;
                 ROM_Path = openFileDialog.FileName;

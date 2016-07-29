@@ -20,3 +20,4 @@ C:\Users\SmallMoves\Documents\Multi_IAP_Application\obj\x86\Debug\Multi_IAP_Appl
 C:\Users\SmallMoves\Documents\Multi_IAP_Application\obj\x86\Debug\Multi_IAP_Application.Properties.Resources.resources
 C:\Users\SmallMoves\Documents\Multi_IAP_Application\obj\x86\Debug\Multi_IAP_Application.csproj.GenerateResource.Cache
 C:\Users\SmallMoves\Documents\Multi_IAP_Application\obj\x86\Debug\Multi_IAP_Application.mainForm1.resources
+C:\Users\SmallMoves\Documents\Multi_IAP_Application\bin\Debug\Multi_IAP_Application.exe.config
