@@ -469,8 +469,9 @@ namespace Multi_IAP_Application
                 time_out = 0;
                 label2.Text = "固件下载成功" + "  总耗时：" + time_count + " 秒";
                 label4.Text = "成   功";
-                label2.BackColor = Color.Green;
-                label4.BackColor = Color.Green;
+                label4.BackColor = Color.WhiteSmoke;
+                label2.BackColor = Color.WhiteSmoke;
+
 
             }
             else if (s.IndexOf("AD+IAPENDACK=2") >= 0)
@@ -480,6 +481,7 @@ namespace Multi_IAP_Application
                 label2.Text = "固件下载失败";
                 label4.Text = "失  败";
                 label4.BackColor = Color.Red;
+                label2.BackColor = Color.Red;
             }
         }
 
@@ -623,7 +625,8 @@ namespace Multi_IAP_Application
                     richTextBox1.AppendText("=========================\r\n");
                     timer1.Stop();
                     timer_sec.Stop();
-                    label2.BackColor = Color.Green;
+                    label4.BackColor = Color.WhiteSmoke;
+                    label2.BackColor = Color.WhiteSmoke;
 
                     check_device_version = true; // 查询版本
                     break;
@@ -631,6 +634,7 @@ namespace Multi_IAP_Application
                 case 5:
                     timer1.Stop();
                     richTextBox1.AppendText("固件下载结束ERROR\r\n");
+                    label4.BackColor = Color.Red;
                     label2.BackColor = Color.Red;
                     check_device_version = true; // 查询版本
                     break;
