@@ -8,6 +8,12 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.IO.Ports;
+using Microsoft.Win32;
+
+
+using System.Management;
+using System.Runtime.InteropServices;
+
 
 namespace Multi_IAP_Application
 {
@@ -30,6 +36,8 @@ namespace Multi_IAP_Application
         public mainForm1()
         {
             InitializeComponent();
+            CheckRegState();
+
             iap_form1 = new IAP_Form();
             iap_form2 = new IAP_Form();
             iap_form3 = new IAP_Form();
@@ -52,6 +60,58 @@ namespace Multi_IAP_Application
 
             load_bin_file();
         }
+
+
+        private bool isReg()
+        {
+            //判断软件是否注册
+            bool isReg = false;
+            SoftReg softReg = new SoftReg();
+
+            RegistryKey retkey = Registry.CurrentUser.OpenSubKey("SOFTWARE", true).CreateSubKey("Mobike").CreateSubKey("Register.INI");         // 新版本注册版的存放
+            RegistryKey retkey1 = Registry.CurrentUser.OpenSubKey("SOFTWARE", true).CreateSubKey("mySoftWare").CreateSubKey("Register.INI");  // 老版本注册版的存放
+
+
+            foreach (string strRNum in retkey.GetSubKeyNames())
+            {
+                if (strRNum == softReg.GetRNum())
+                {
+                    isReg = true;
+                }
+            }
+
+            foreach (string strRNum in retkey1.GetSubKeyNames())
+            {
+                if (strRNum == softReg.GetRNum())
+                {
+                    isReg = true;
+                }
+            }
+            return isReg;
+        }
+
+
+        public void CheckRegState()
+        {
+            //检测注册
+            if (isReg() == false)
+            {
+                this.Text += " 【未注册】";
+                RegForm regform = new RegForm();
+                regform.ShowDialog();
+
+                //Application.Exit();
+                //System.Diagnostics.Process.Start(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                return;
+            }
+            else
+            {
+                this.Text += " 【已注册】";
+            }
+
+        }
+
+
 
         public void load_bin_file()
         {
