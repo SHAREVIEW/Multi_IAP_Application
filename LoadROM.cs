@@ -29,6 +29,10 @@ namespace Multi_IAP_Application
         public string ROMLB_3_4_HardwareVer;
         public string ROMLB_3_4_SoftwareVer;
 
+        public string ROMLB4_4_Path;
+        public string ROMLB_4_4_HardwareVer;
+        public string ROMLB_4_4_SoftwareVer;
+
 
         int ROMLB_3_3_Bin_Size;
         BinaryReader ROMLB_3_3_bin_read;
@@ -39,6 +43,10 @@ namespace Multi_IAP_Application
         BinaryReader ROMLB_3_4_bin_read;
         byte[] ROMLB_3_4_bytes;
 
+        int ROMLB_4_4_Bin_Size;
+        BinaryReader ROMLB_4_4_bin_read;
+        byte[] ROMLB_4_4_bytes;
+
 
 
         public LoadROM()
@@ -47,14 +55,18 @@ namespace Multi_IAP_Application
 
             ROMLB3_3_Path = Properties.Settings.Default.LB3_3_FilePath;
             ROMLB3_4_Path = Properties.Settings.Default.LB3_4_FilePath;
-
+            ROMLB4_4_Path = Properties.Settings.Default.LB4_4_FilePath;
 
             textBox1.Text = ROMLB3_3_Path;
             textBox3.Text = ROMLB3_4_Path;
+            textBox4.Text = ROMLB4_4_Path;
+
             ROM_Path = ROMLB3_3_Path;
 
             listView1.Items[0].SubItems[1].Text = Path.GetFileName(ROMLB3_3_Path);
             listView1.Items[1].SubItems[1].Text = Path.GetFileName(ROMLB3_4_Path);
+            listView1.Items[2].SubItems[1].Text = Path.GetFileName(ROMLB4_4_Path);
+
 
             check_ver();
             ROM_VERSION = ROMLB_3_3_SoftwareVer;
@@ -77,9 +89,14 @@ namespace Multi_IAP_Application
                 ROMLB_3_3_bin_read.Close();
                 fs1.Close();
                 string filename1 = Path.GetFileName(ROMLB3_3_Path);
-                ROMLB_3_3_HardwareVer = filename1.Substring(13, 5);
-                ROMLB_3_3_SoftwareVer = filename1.Substring(19, 4);
 
+                if (filename1.Length != 27)
+                    MessageBox.Show("文件名长度不对");
+                if (filename1.Length == 27)
+                {
+                    ROMLB_3_3_HardwareVer = filename1.Substring(13, 5);
+                    ROMLB_3_3_SoftwareVer = filename1.Substring(19, 4);
+                }
                 if (ROMLB_3_3_HardwareVer != "LB3_3")
                     MessageBox.Show("固件加载错误！");
 
@@ -101,9 +118,14 @@ namespace Multi_IAP_Application
                 ROMLB_3_4_bin_read.Close();
                 fs2.Close();
                 string filename2 = Path.GetFileName(ROMLB3_4_Path);
-                ROMLB_3_4_HardwareVer = filename2.Substring(13, 5);
-                ROMLB_3_4_SoftwareVer = filename2.Substring(19, 4);
 
+                if (filename2.Length != 27)
+                    MessageBox.Show("文件名长度不对");
+                if (filename2.Length == 27)
+                {
+                    ROMLB_3_4_HardwareVer = filename2.Substring(13, 5);
+                    ROMLB_3_4_SoftwareVer = filename2.Substring(19, 4);
+                }
                 if (ROMLB_3_4_HardwareVer != "LB3_4")
                     MessageBox.Show("固件加载错误！");
 
@@ -112,6 +134,36 @@ namespace Multi_IAP_Application
                 size2 = size2 / 1024;
                 listView1.Items[1].SubItems[4].Text = size2.ToString() + "KB";
             }
+
+            if (ROMLB4_4_Path != "")
+            {
+                FileInfo info3 = new FileInfo(ROMLB4_4_Path);
+                int size3 = (int)info3.Length;
+                ROMLB_4_4_Bin_Size = size3;
+                FileStream fs3 = new FileStream(ROMLB4_4_Path, FileMode.Open, FileAccess.Read);
+                ROMLB_4_4_bin_read = new BinaryReader(fs3);
+                ROMLB_4_4_bytes = new byte[ROMLB_4_4_Bin_Size];
+                ROMLB_4_4_bytes = ROMLB_4_4_bin_read.ReadBytes(ROMLB_4_4_Bin_Size);
+                ROMLB_4_4_bin_read.Close();
+                fs3.Close();
+                string filename3 = Path.GetFileName(ROMLB4_4_Path);
+                if (filename3.Length != 27)
+                    MessageBox.Show("文件名长度不对");
+                if (filename3.Length == 27)
+                {
+                    ROMLB_4_4_HardwareVer = filename3.Substring(13, 5);
+                    ROMLB_4_4_SoftwareVer = filename3.Substring(19, 4);
+
+                    if (ROMLB_4_4_HardwareVer != "LB4_4")
+                        MessageBox.Show("固件加载错误！");
+                }
+                listView1.Items[2].SubItems[2].Text = ROMLB_4_4_HardwareVer;
+                listView1.Items[2].SubItems[3].Text = ROMLB_4_4_SoftwareVer; // 软件版本
+                size3 = size3 / 1024;
+                listView1.Items[2].SubItems[4].Text = size3.ToString() + "KB";
+            }
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -167,6 +219,39 @@ namespace Multi_IAP_Application
                 check_ver();
                 ROM_Path = ROMLB3_3_Path;
 
+            }
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.InitialDirectory = "E:\\";
+            openFileDialog.Filter = "Bin文件(*.bin)|*.bin";
+            openFileDialog.RestoreDirectory = true;
+            openFileDialog.FilterIndex = 1;
+            openFileDialog.Multiselect = true;//允许同时选择多个文件
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+
+                ROMLB4_4_Path = openFileDialog.FileName;
+                listView1.Items[2].SubItems[1].Text = Path.GetFileName(ROMLB4_4_Path);
+
+                textBox4.Text = ROMLB4_4_Path;
+                Properties.Settings.Default.LB4_4_FilePath = ROMLB4_4_Path;
+                Properties.Settings.Default.Save();  // save 文件路径
+                check_ver();
+
+                ROM_Path = ROMLB4_4_Path;
             }
         }
     }

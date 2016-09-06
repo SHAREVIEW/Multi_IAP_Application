@@ -46,5 +46,17 @@ namespace Multi_IAP_Application.Properties {
                 this["LB3_4_FilePath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LB4_4_FilePath {
+            get {
+                return ((string)(this["LB4_4_FilePath"]));
+            }
+            set {
+                this["LB4_4_FilePath"] = value;
+            }
+        }
     }
 }

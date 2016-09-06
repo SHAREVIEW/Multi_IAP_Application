@@ -119,7 +119,7 @@ namespace Multi_IAP_Application
         {
             string tROMLB3_3_Path = Properties.Settings.Default.LB3_3_FilePath;
             string tROMLB3_4_Path = Properties.Settings.Default.LB3_4_FilePath;
-
+            string tROMLB4_4_Path = Properties.Settings.Default.LB4_4_FilePath;
 
         
             string tROM_Path;
@@ -127,6 +127,7 @@ namespace Multi_IAP_Application
 
             if (tROMLB3_3_Path == "") return;
             if (tROMLB3_4_Path == "") return;
+            if (tROMLB4_4_Path == "") return;
 
             if(s=="LB3_3")
             {
@@ -161,7 +162,23 @@ namespace Multi_IAP_Application
                 updateROMVer = filename1.Substring(19, 4);
                 label4.Text = "升级版本" + updateROMVer;
             }
-
+            if (s == "LB4_4")
+            {
+                tROM_Path = tROMLB4_4_Path;
+                FileInfo info = new FileInfo(tROM_Path);
+                int size = (int)info.Length;
+                Bin_Size = size;
+                ROM_Bin_Size = Bin_Size;
+                FileStream fs = new FileStream(tROM_Path, FileMode.Open, FileAccess.Read);
+                ROM_Bin_read = new BinaryReader(fs);
+                DownBytes = ROM_Bin_read.ReadBytes(size);
+                ROM_Bin_read.Close();
+                fs.Close();
+                // 获取要升级的软件版本
+                string filename1 = Path.GetFileName(tROM_Path);
+                updateROMVer = filename1.Substring(19, 4);
+                label4.Text = "升级版本" + updateROMVer;
+            }
 
         }
 
@@ -248,6 +265,42 @@ namespace Multi_IAP_Application
                         startIAP();
                     }
                 }
+
+                if (hardware_version == "LB4_4")
+                {
+                    load_iap_bin_file(hardware_version);
+
+                    // 版本比较，相同版本不升级
+                    string tmp_LocalROMVer = LocalROMVer.Replace(".", "");
+                    string tmp_updateROMVer = updateROMVer.Replace("V", "");
+
+                    if (tmp_LocalROMVer == tmp_updateROMVer)
+                    {
+                        label2.BackColor = Color.Green;
+                        label4.BackColor = Color.Green;
+                        label2.Text = "版本相同，发送开锁命令";
+                        if (unlock_cmd == false)
+                        {
+                            unlock_cmd = true;
+                            serialPort1.Write("AT+MOTOR\r\n");
+                            serialPort1.Write("AT+MOTOR\r\n");
+                            serialPort1.Write("AT+MOTOR\r\n");
+                            readyUndate = true;
+                            richTextBox1.Clear();
+                        }
+                    }
+                    else
+                    {
+                        label5.Text = "硬件版本: " + "\r\n" + "软件版本: ";
+                        label4.Text = "";
+                        label4.BackColor = Color.WhiteSmoke;
+                        label2.BackColor = Color.WhiteSmoke;
+
+                        startIAP();
+                    }
+                }
+
+
             }
 
           //修正时间[ INIT_INFO][11:04:10] Encrypt ok! 
